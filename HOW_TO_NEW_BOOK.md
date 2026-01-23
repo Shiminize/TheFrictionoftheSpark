@@ -1,4 +1,4 @@
-# 📖 How to Publish a New Novel
+The # 📖 How to Publish a New Novel
 
 Follow these steps to create a new website for a different book using this engine.
 
@@ -12,6 +12,11 @@ Follow these steps to create a new website for a different book using this engin
 3.  Rename `data.sample.js` to `data.js`.
 4.  Open `data.js` and paste your new story content inside the JSON structure.
     *   **Note**: Keep the connection `PocketReader.bookContent = [...]` matching the file.
+
+## Step 3: Add Cover Image
+1.  Save your book cover image as **`cover.png`** (Must be PNG, must be named 'cover').
+2.  Replace the existing file in `src/assets/images/cover.png`.
+3.  **No code change needed** if you use this exact name.
 
 ## Step 3: Update Metadata
 1.  Open `index.html`.

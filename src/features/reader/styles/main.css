@@ -241,6 +241,22 @@ body {
     margin-bottom: 1.5em;
 }
 
+/* Cover Image Styles */
+.cover-img {
+    display: block;
+    max-width: 100%;
+    max-height: 80vh;
+    width: auto;
+    margin: 0 auto 2rem auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.cover-img:hover {
+    transform: scale(1.02);
+}
+
 .end-of-chapter {
     text-align: center;
     margin-top: 60px;
