@@ -1,0 +1,53 @@
+/* themes.css - Color Palette Options */
+
+/* 1. Calm Light (Default) - Airy, paper-like feel */
+:root, [data-theme="light"] {
+  --hue-base: 210; /* Soft Blue-Gray */
+  --sat-base: 12%;
+
+  --color-bg-paper: hsl(var(--hue-base), var(--sat-base), 98%);
+  --color-bg-default: hsl(var(--hue-base), var(--sat-base), 94%);
+  --color-text-primary: hsl(var(--hue-base), var(--sat-base), 15%);
+  --color-text-secondary: hsl(var(--hue-base), var(--sat-base), 40%);
+  --color-accent: hsl(var(--hue-base), 60%, 50%);
+  --color-border: hsl(var(--hue-base), var(--sat-base), 85%);
+}
+
+/* 2. Modern Dark - Deep charcoal, high legibility */
+[data-theme="dark"] {
+  --hue-base: 220; /* Deep Cool Gray */
+  --sat-base: 10%;
+
+  --color-bg-paper: hsl(var(--hue-base), var(--sat-base), 10%);
+  --color-bg-default: hsl(var(--hue-base), var(--sat-base), 14%);
+  --color-text-primary: hsl(var(--hue-base), var(--sat-base), 90%);
+  --color-text-secondary: hsl(var(--hue-base), var(--sat-base), 65%);
+  --color-accent: hsl(var(--hue-base), 70%, 60%);
+  --color-border: hsl(var(--hue-base), var(--sat-base), 20%);
+}
+
+/* 3. Warm Sepia - Classic book feel, low eye strain */
+[data-theme="sepia"] {
+  --hue-base: 35; /* Warm Orange/Brown */
+  --sat-base: 25%;
+
+  --color-bg-paper: hsl(var(--hue-base), var(--sat-base), 94%);
+  --color-bg-default: hsl(var(--hue-base), var(--sat-base), 88%);
+  --color-text-primary: hsl(var(--hue-base), 15%, 25%); /* Dark brown text */
+  --color-text-secondary: hsl(var(--hue-base), 15%, 45%);
+  --color-accent: hsl(var(--hue-base), 60%, 45%);
+  --color-border: hsl(var(--hue-base), var(--sat-base), 80%);
+}
+
+/* 4. Cool Nordic - Crisp, clean, minimal */
+[data-theme="nordic"] {
+  --hue-base: 190; /* Cyan/Teal hints */
+  --sat-base: 15%;
+
+  --color-bg-paper: hsl(var(--hue-base), var(--sat-base), 96%);
+  --color-bg-default: hsl(var(--hue-base), var(--sat-base), 90%);
+  --color-text-primary: hsl(var(--hue-base), 30%, 15%); /* Deep teal-black */
+  --color-text-secondary: hsl(var(--hue-base), 20%, 40%);
+  --color-accent: hsl(var(--hue-base), 65%, 45%);
+  --color-border: hsl(var(--hue-base), var(--sat-base), 82%);
+}

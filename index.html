@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#fcfcfc">
+    <title>Pocket Reader</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Work+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Main Reading Area -->
+    <main id="reader" class="reader-container">
+        <header id="chapter-header" class="chapter-header">
+            <!-- Title injected by JS -->
+        </header>
+
+        <div id="content-area" class="content-area">
+            <!-- Text injected by JS -->
+        </div>
+
+        <div class="end-of-chapter">
+            <span class="divider">❖</span>
+        </div>
+    </main>
+
+    <!-- Floating Navigation Controls (Bottom) -->
+    <nav class="controls-bar">
+        <button id="prev-btn" class="icon-btn" aria-label="Previous Chapter">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6" />
+            </svg>
+        </button>
+
+        <div class="progress-indicator">
+            <span id="chapter-display">Part I</span>
+        </div>
+
+        <button id="next-btn" class="icon-btn" aria-label="Next Chapter">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6" />
+            </svg>
+        </button>
+
+        <button id="menu-toggle" class="icon-btn" aria-label="Settings">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Settings Overlay -->
+    <div id="settings-panel" class="settings-panel hidden">
+        <div class="settings-content">
+            <h3>Settings</h3>
+
+            <div class="setting-group">
+                <label>Theme</label>
+                <div class="theme-toggles">
+                    <button class="theme-btn light active" data-theme="light">Light</button>
+                    <button class="theme-btn dark" data-theme="dark">Dark</button>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <label>Font Size</label>
+                <input type="range" id="font-size-slider" min="14" max="24" value="18">
+            </div>
+
+            <div class="setting-group">
+                <label>Chapters</label>
+                <ul id="toc-list" class="toc-list">
+                    <!-- TOC injected by JS -->
+                </ul>
+            </div>
+
+            <button id="close-settings" class="close-btn">Close</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="book.js"></script> <!-- Data -->
+    <script src="script.js"></script> <!-- Logic -->
+</body>
+
+</html>

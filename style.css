@@ -1,0 +1,258 @@
+/* Pocket Reader - Cinematic Styles */
+
+:root {
+    /* Safe Area Insets for Mobile */
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+
+    /* Light Theme (Default) */
+    --bg-color: #fcfcfc;
+    --text-color: #2c2c2c;
+    --ui-bg: rgba(255, 255, 255, 0.95);
+    --ui-border: #eaeaea;
+    --accent: #555;
+
+    /* Typography */
+    --font-body: 'Merriweather', serif;
+    --font-ui: 'Work Sans', sans-serif;
+
+    /* Layout */
+    --max-width: 680px;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --ui-bg: rgba(26, 26, 26, 0.95);
+    --ui-border: #333;
+    --accent: #aaa;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Reader Container */
+.reader-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: calc(var(--sat) + 40px) 24px calc(var(--sab) + 100px);
+    min-height: 100vh;
+}
+
+.chapter-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.chapter-header h1 {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin: 0;
+}
+
+.content-area {
+    font-size: 18px;
+    /* Default, overridden by JS */
+    line-height: 1.8;
+    text-align: left;
+}
+
+.content-area p {
+    margin-bottom: 1.5em;
+}
+
+.end-of-chapter {
+    text-align: center;
+    margin-top: 60px;
+    color: var(--accent);
+    opacity: 0.5;
+}
+
+/* UI Controls */
+.controls-bar {
+    position: fixed;
+    bottom: calc(20px + var(--sab));
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    background: var(--ui-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--ui-border);
+    border-radius: 50px;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+/* Hide controls on scroll down (handled by JS class) */
+.controls-bar.hidden {
+    transform: translate(-50%, 150%);
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+.icon-btn:active {
+    opacity: 0.6;
+}
+
+.progress-indicator {
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* Settings Panel */
+.settings-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+    display: flex;
+    justify-content: flex-end;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s;
+}
+
+.settings-panel.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.settings-content {
+    width: 85%;
+    max-width: 320px;
+    background: var(--bg-color);
+    height: 100%;
+    padding: calc(var(--sat) + 20px) 24px;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+    transform: translateX(0);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.settings-panel.hidden .settings-content {
+    transform: translateX(100%);
+}
+
+.setting-group label {
+    display: block;
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.theme-toggles {
+    display: flex;
+    gap: 10px;
+}
+
+.theme-btn {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--ui-border);
+    background: none;
+    color: var(--text-color);
+    border-radius: 8px;
+    font-family: var(--font-ui);
+    cursor: pointer;
+}
+
+.theme-btn.active {
+    background: var(--text-color);
+    color: var(--bg-color);
+    border-color: var(--text-color);
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.toc-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--ui-border);
+    font-family: var(--font-ui);
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.toc-list li.active {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.close-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--ui-border);
+    border: none;
+    border-radius: 12px;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: pointer;
+}
