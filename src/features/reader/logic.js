@@ -128,8 +128,9 @@ function setLanguage(lang) {
 
 function updateDisplay() {
     const bookContent = PocketReader.bookContent;
-    // Localized Part Label
-    const partLabel = state.lang === 'cn' ? '第 ' + state.currentChapter + ' 部' : `Part ${state.currentChapter}`;
+    // Localized Title from Data
+    const chapterData = bookContent[state.currentChapter - 1];
+    const partLabel = state.lang === 'cn' ? (chapterData.title_cn || chapterData.title) : chapterData.title;
     dom.pageDisplay.textContent = partLabel;
 
     const total = bookContent.length;
