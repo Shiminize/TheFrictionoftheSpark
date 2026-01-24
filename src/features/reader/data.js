@@ -1,4 +1,4 @@
-export const chapters = [
+PocketReader.bookContent = [
     {
         "chapter": 0,
         "title": "COVER",
