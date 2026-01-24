@@ -47,9 +47,17 @@ window.PocketReaderLogic = (function () {
         if (!chapterData) return;
 
         // Determine Content Language
-        const isCN = state.lang === 'cn';
-        const title = isCN ? (chapterData.title_cn || chapterData.title) : chapterData.title;
-        const content = isCN ? (chapterData.content_cn || chapterData.content) : chapterData.content;
+        let title, content;
+        if (state.lang === 'cn') {
+            title = chapterData.title_cn || chapterData.title;
+            content = chapterData.content_cn || chapterData.content;
+        } else if (state.lang === 'id') {
+            title = chapterData.title_id || chapterData.title;
+            content = chapterData.content_id || chapterData.content;
+        } else {
+            title = chapterData.title;
+            content = chapterData.content;
+        }
 
         // 1. Create new page element
         const pageDiv = document.createElement('div');
@@ -129,7 +137,14 @@ window.PocketReaderLogic = (function () {
         const bookContent = PocketReader.bookContent;
         // Localized Title from Data
         const chapterData = bookContent[state.currentChapter - 1];
-        const partLabel = state.lang === 'cn' ? (chapterData.title_cn || chapterData.title) : chapterData.title;
+        let partLabel;
+        if (state.lang === 'cn') {
+            partLabel = chapterData.title_cn || chapterData.title;
+        } else if (state.lang === 'id') {
+            partLabel = chapterData.title_id || chapterData.title;
+        } else {
+            partLabel = chapterData.title;
+        }
         dom.pageDisplay.textContent = partLabel;
 
         const total = bookContent.length;
@@ -210,8 +225,15 @@ window.PocketReaderLogic = (function () {
         bookContent.forEach((chapter, index) => {
             const li = document.createElement('li');
             // Use localized title
-            const isCN = state.lang === 'cn';
-            li.textContent = isCN ? (chapter.title_cn || chapter.title) : chapter.title;
+            let title;
+            if (state.lang === 'cn') {
+                title = chapter.title_cn || chapter.title;
+            } else if (state.lang === 'id') {
+                title = chapter.title_id || chapter.title;
+            } else {
+                title = chapter.title;
+            }
+            li.textContent = title;
 
             li.addEventListener('click', () => jumpToChapter(index + 1));
             dom.tocList.appendChild(li);
