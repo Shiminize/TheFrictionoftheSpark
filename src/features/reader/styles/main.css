@@ -10,9 +10,12 @@
     --text-secondary: var(--color-espresso);
 
     /* UI Elements */
+    --bg-panel: var(--color-latte);
     --ui-bg: var(--bg-panel);
     --ui-border: var(--color-evergreen);
+    --ui-tag-bg: var(--color-espresso);
     --accent: var(--color-rosewood);
+    --text-inverse: var(--color-cream);
 
     /* Typography */
     --font-body: 'Merriweather', 'Georgia', serif;

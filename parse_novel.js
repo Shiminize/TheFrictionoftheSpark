@@ -5,7 +5,8 @@ const filePath = '/Users/decepticonmanager/Book Reader/Content/The Audacity of S
 const content = fs.readFileSync(filePath, 'utf8');
 
 const chapters = [];
-const chapterRegex = /Ch (\d+): (.*?)(?=\nCh \d+:|$)/gs;
+// Updated regex to properly capture title and content
+const chapterRegex = /Ch (\d+): (.*?)\n(.*?)(?=\nCh \d+:|$)/gs;
 
 // Cover entry
 chapters.push({
@@ -20,8 +21,9 @@ let match;
 while ((match = chapterRegex.exec(content)) !== null) {
     const chapterNum = parseInt(match[1]);
     const title = match[2].trim();
-    const chapterContent = match[0].split('\n').slice(1).join('\n').trim();
+    const chapterContent = match[3].trim();
 
+    // Format paragraph breaks
     const formattedContent = chapterContent
         .split('\n\n')
         .map(p => `<p>${p.trim().replace(/\n/g, ' ')}</p>`)
@@ -30,12 +32,12 @@ while ((match = chapterRegex.exec(content)) !== null) {
     chapters.push({
         chapter: chapterNum,
         title: `CH ${chapterNum}: ${title}`,
-        title_cn: `第 ${chapterNum} 章: ${title}`, // Placeholder translation or just title
+        title_cn: `第 ${chapterNum} 章: ${title}`,
         content: formattedContent,
-        content_cn: formattedContent // Placeholder for CN content
+        content_cn: formattedContent
     });
 }
 
 const output = `PocketReader.bookContent = ${JSON.stringify(chapters, null, 4)};`;
 fs.writeFileSync('/Users/decepticonmanager/Book Reader/src/features/reader/data.js', output);
-console.log('Successfully generated data.js');
+console.log('Successfully regenerated data.js with correct structure');
