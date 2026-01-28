@@ -3,7 +3,7 @@ const path = require('path');
 const CryptoJS = require('crypto-js');
 
 // Config: Point to the location of the source content files relative to this script
-const contentDir = path.join(__dirname, '../TheEchoChamber/Content');
+const contentDir = path.join(__dirname, '../Content');
 const enPath = path.join(contentDir, 'the_structual_integrity_of_walls');
 const cnPath = path.join(contentDir, 'the_structual_integrity_of_walls_CN');
 
