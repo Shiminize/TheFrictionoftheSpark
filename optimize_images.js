@@ -2,42 +2,40 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+const srcDir = '/Users/decepticonmanager/Book Reader/Content/TheFrictionOfTheSpark/images';
 const images = [
-    '/Users/decepticonmanager/Book Reader/src/assets/images/The Friction of the Spark.png',
-    '/Users/decepticonmanager/Book Reader/src/assets/images/The Friction of the Spark.png-last scene.png'
+    'cover.png',
+    'last_scene.png'
 ];
 
-const destDir = '/Users/decepticonmanager/Book Reader/Content/TheFrictionOfTheSpark/images';
-if (!fs.existsSync(destDir)) {
-    fs.mkdirSync(destDir, { recursive: true });
+if (!fs.existsSync(srcDir)) {
+    console.error('Source directory not found:', srcDir);
+    process.exit(1);
 }
 
-images.forEach(src => {
-    const filename = path.basename(src);
-    const dest = path.join(destDir, filename);
+images.forEach(filename => {
+    const src = path.join(srcDir, filename);
+    const destJpg = src.replace('.png', '.jpg');
 
-    // Convert to high-quality JPEG to reduce size significantly while keeping visual quality
-    // Since user said "without reducing visual size", they often mean dimensions.
-    // PNGs are huge. JPEG 85% is a safely standard optimization for photos/art.
-    // If transparent, we'd need PNG, but "The Friction of the Spark" sounds like a cover (opaque).
-    // Let's assume opaque for cover and scene.
+    if (fs.existsSync(src)) {
+        try {
+            console.log(`Optimizing ${filename}...`);
+            // Convert to JPEG with 85% quality to keep visual quality high but reduce size
+            execSync(`sips -s format jpeg -s formatOptions 85 "${src}" --out "${destJpg}"`);
 
-    // Using sips to convert to jpeg with 80% quality.
-    // Also keeping same dimensions.
+            const oldSize = fs.statSync(src).size / 1024 / 1024;
+            const newSize = fs.statSync(destJpg).size / 1024 / 1024;
+            console.log(`Saved to ${destJpg}`);
+            console.log(`Size reduced from ${oldSize.toFixed(2)}MB to ${newSize.toFixed(2)}MB`);
 
-    // We will rename to .jpg for better browser handling if we convert.
-    const destJpg = dest.replace('.png', '.jpg');
+            // Remove the old png? No, keep it as backup or for source, but repo will use jpg.
+            // Actually, better to remove the big pngs from repo to save space if committed.
+            // But I will just use jpg in code.
 
-    try {
-        console.log(`Optimizing ${filename}...`);
-        // sips -s format jpeg -s formatOptions 80
-        execSync(`sips -s format jpeg -s formatOptions 80 "${src}" --out "${destJpg}"`);
-        console.log(`Saved to ${destJpg}`);
-
-        const oldSize = fs.statSync(src).size / 1024 / 1024;
-        const newSize = fs.statSync(destJpg).size / 1024 / 1024;
-        console.log(`Size reduced from ${oldSize.toFixed(2)}MB to ${newSize.toFixed(2)}MB`);
-    } catch (e) {
-        console.error(`Failed to optimize ${filename}:`, e);
+        } catch (e) {
+            console.error(`Failed to optimize ${filename}:`, e);
+        }
+    } else {
+        console.warn(`File not found: ${src}`);
     }
 });

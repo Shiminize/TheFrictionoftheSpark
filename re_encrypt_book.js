@@ -105,6 +105,6 @@ function encryptBook(bookName, languageFiles, images = {}) {
 encryptBook('TheFrictionOfTheSpark', {
     en: 'en.txt'
 }, {
-    cover: 'Content/TheFrictionOfTheSpark/images/cover.png',
-    lastScene: 'Content/TheFrictionOfTheSpark/images/last_scene.png'
+    cover: 'Content/TheFrictionOfTheSpark/images/cover.jpg',
+    lastScene: 'Content/TheFrictionOfTheSpark/images/last_scene.jpg'
 });
