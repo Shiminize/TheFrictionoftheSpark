@@ -1,41 +1,6 @@
-@import 'colors.css';
-
 /* Pocket Reader - Cinematic Styles */
 
-/* CSS Variables from Design Skill */
-/* CSS Variables mapped from shared/styles/themes.css */
-:root {
-    /* Colors - Mapped from shared themes */
-    --bg-color: var(--color-bg-default);
-    --text-color: var(--color-text-primary);
-    --text-secondary: var(--color-text-secondary);
-
-    /* UI Elements */
-    --bg-panel: var(--color-bg-paper);
-    --ui-bg: var(--color-bg-paper);
-    --ui-border: var(--color-border);
-    --ui-tag-bg: var(--color-accent);
-    --accent: var(--color-accent);
-    --text-inverse: #FFFFFF;
-
-    /* Typography */
-    --font-body: 'Merriweather', 'Georgia', serif;
-    --font-ui: 'Work Sans', -apple-system, system-ui, sans-serif;
-
-    /* Safe Area */
-    --sat: env(safe-area-inset-top);
-    --sab: env(safe-area-inset-bottom);
-}
-
-[data-theme="dark"] {
-    --bg-color: var(--color-bg-default);
-    --text-color: var(--color-text-primary);
-    --text-secondary: var(--color-text-secondary);
-    --ui-bg: var(--color-bg-paper);
-    --bg-panel: var(--color-bg-paper);
-    --ui-border: var(--color-border);
-    --accent: var(--color-accent);
-}
+/* CSS Variables are loaded via src/shared/styles/themes.css in index.html */
 
 * {
     box-sizing: border-box;

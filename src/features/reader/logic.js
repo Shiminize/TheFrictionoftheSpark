@@ -62,6 +62,18 @@ window.PocketReaderLogic = (function () {
             content = chapterData.content;
         }
 
+        // --- PARAGRAPH PROCESSING ---
+        // Convert double newlines to <p> tags, and single newlines to <br> if they exist
+        // This ensures the raw text data is properly organized for HTML rendering
+        if (content) {
+            content = content
+                .split(/\n\n+/) // Split by 2 or more newlines
+                .map(para => para.trim())
+                .filter(para => para.length > 0)
+                .map(para => `<p>${para.replace(/\n/g, '<br>')}</p>`)
+                .join('');
+        }
+
         // 1. Create new page element
         const pageDiv = document.createElement('div');
         pageDiv.classList.add('page');
