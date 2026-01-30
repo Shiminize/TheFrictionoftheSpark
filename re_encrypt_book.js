@@ -56,6 +56,11 @@ function encryptBook(bookName, languageFiles, images = {}) {
             theme_color: "#efe8d9"
         };
 
+        // Fix title duplication in content if present
+        if (chapterObj.content.startsWith(title)) {
+            chapterObj.content = chapterObj.content.substring(title.length).trim();
+        }
+
         // Inject Cover into Chapter 1
         if (i === 0 && images && images.cover) {
             chapterObj.cover = images.cover;
@@ -89,25 +94,10 @@ function encryptBook(bookName, languageFiles, images = {}) {
     console.log(`Successfully encrypted: ${bookName}`);
 }
 
-// 1. TheStructuralIntegrityOfWalls
-encryptBook('TheStructuralIntegrityOfWalls', {
-    en: 'en.txt',
-    cn: 'cn.txt'
-});
-
-// 2. TheSunriseHarvest
-encryptBook('TheSunriseHarvest', {
-    en: 'The Sunrise Harvest.txt',
-    cn: 'The Sunrise Harvest_CN.txt',
-    id: 'The Sunrise Harvest_ID.txt',
-    ru: 'The Sunrise Harvest_RU.txt'
-});
-
-// 3. TheFrictionOfTheSpark
 // 3. TheFrictionOfTheSpark
 encryptBook('TheFrictionOfTheSpark', {
     en: 'en.txt'
 }, {
-    cover: 'Content/TheFrictionOfTheSpark/images/cover.jpg',
-    lastScene: 'Content/TheFrictionOfTheSpark/images/last_scene.jpg'
+    cover: 'Content/TheFrictionOfTheSpark/images/cover.png',
+    lastScene: 'Content/TheFrictionOfTheSpark/images/last_scene.png'
 });

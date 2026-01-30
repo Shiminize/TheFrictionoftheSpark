@@ -525,3 +525,26 @@ body {
         height: 16px;
     }
 }
+/* Image Styles */
+.cover-img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.end-scene {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.scene-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
