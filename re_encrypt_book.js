@@ -4,7 +4,7 @@ const path = require('path');
 
 const password = 'lieverd';
 
-function encryptBook(bookName, languageFiles) {
+function encryptBook(bookName, languageFiles, images = {}) {
     const bookContent = [];
     const baseDir = path.join('/Users/decepticonmanager/Book Reader/Content', bookName);
 
@@ -56,6 +56,16 @@ function encryptBook(bookName, languageFiles) {
             theme_color: "#efe8d9"
         };
 
+        // Inject Cover into Chapter 1
+        if (i === 0 && images && images.cover) {
+            chapterObj.cover = images.cover;
+        }
+
+        // Inject Last Scene into Last Chapter
+        if (i === titles.length - 1 && images && images.lastScene) {
+            chapterObj.content += `<div class="end-scene"><img src="${images.lastScene}" alt="End Scene" class="scene-img"></div>`;
+        }
+
         if (otherLangs['cn']) {
             chapterObj.title_cn = otherLangs['cn'].titles[i] ? `第 ${i + 1} 章: ${otherLangs['cn'].titles[i]}` : chapterObj.title;
             chapterObj.content_cn = otherLangs['cn'].chapters[i] ? otherLangs['cn'].chapters[i].trim() : '';
@@ -94,6 +104,10 @@ encryptBook('TheSunriseHarvest', {
 });
 
 // 3. TheFrictionOfTheSpark
+// 3. TheFrictionOfTheSpark
 encryptBook('TheFrictionOfTheSpark', {
     en: 'en.txt'
+}, {
+    cover: 'Content/TheFrictionOfTheSpark/images/cover.jpg',
+    lastScene: 'Content/TheFrictionOfTheSpark/images/last_scene.jpg'
 });

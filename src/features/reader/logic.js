@@ -89,6 +89,7 @@ window.PocketReaderLogic = (function () {
         pageDiv.innerHTML = `
         <div class="page-content">
             <div class="page-header">
+                ${chapterData.cover && state.currentChapter === 1 ? `<img src="${chapterData.cover}" class="cover-img" alt="Cover">` : ''}
                 <h1>${title}</h1>
             </div>
             <div class="page-text">
