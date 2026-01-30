@@ -19,8 +19,6 @@ function encryptBook(bookName, languageFiles, images = {}) {
 
     // Split EN into chapters for baseline
     const enText = langData['en'];
-    // Handle both "Chapter 1:" and "# Chapter 1:" or similar variants if needed
-    // The Friction of the Spark has "Chapter 1: The Gilded Cage"
     const chapterSplits = enText.split(/Chapter \d+:/);
     const chapters = chapterSplits.filter(c => c.trim().length > 0);
     const titlesMatch = enText.match(/Chapter \d+: (.*)/g);
@@ -48,6 +46,20 @@ function encryptBook(bookName, languageFiles, images = {}) {
         };
     }
 
+    // --- Inject Cover Page as First Item ---
+    if (images && images.cover) {
+        bookContent.push({
+            title: "Cover",
+            title_cn: "封面",
+            title_id: "Sampul",
+            title_ru: "Обложка",
+            content: `<img src="${images.cover}" class="cover-img-full" alt="Cover">`,
+            book_title: bookName.replace(/([A-Z])/g, ' $1').trim(),
+            theme_color: "#efe8d9"
+        });
+    }
+
+    // --- Process Chapters ---
     titles.forEach((title, i) => {
         const chapterObj = {
             title: `Chapter ${i + 1}: ${title}`,
@@ -59,11 +71,6 @@ function encryptBook(bookName, languageFiles, images = {}) {
         // Fix title duplication in content if present
         if (chapterObj.content.startsWith(title)) {
             chapterObj.content = chapterObj.content.substring(title.length).trim();
-        }
-
-        // Inject Cover into Chapter 1
-        if (i === 0 && images && images.cover) {
-            chapterObj.cover = images.cover;
         }
 
         // Inject Last Scene into Last Chapter
