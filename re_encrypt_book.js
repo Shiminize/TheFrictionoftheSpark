@@ -2,7 +2,7 @@ const CryptoJS = require('crypto-js');
 const fs = require('fs');
 const path = require('path');
 
-const password = 'crazyfrog';
+const password = 'lieverd';
 
 function encryptBook(bookName, languageFiles) {
     const bookContent = [];
