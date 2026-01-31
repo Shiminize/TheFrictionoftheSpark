@@ -28,17 +28,17 @@ function encryptBook(bookName, languageFiles, images = {}) {
     const otherLangs = {};
     for (const [lang, text] of Object.entries(langData)) {
         if (lang === 'en') continue;
-        const splitRegex = lang === 'cn' ? /Chapter \d+:|第 \d+ 章:/ :
+        const splitRegex = lang === 'cn' ? /Chapter \d+:|第 \d+ 章[：:]/ :
             lang === 'id' ? /Chapter \d+:|Bab \d+:/ :
                 lang === 'ru' ? /Chapter \d+:|Глава \d+:/ : /Chapter \d+:/;
 
         const langChapters = text.split(splitRegex).filter(c => c.trim().length > 0);
-        const titleRegex = lang === 'cn' ? /第 \d+ 章: (.*)/g :
+        const titleRegex = lang === 'cn' ? /第 \d+ 章[：:] (.*)/g :
             lang === 'id' ? /Bab \d+: (.*)/ :
                 lang === 'ru' ? /Глава \d+: (.*)/ : /Chapter \d+: (.*)/;
 
         const langTitlesMatch = text.match(new RegExp(titleRegex.source, 'g'));
-        const langTitles = langTitlesMatch ? langTitlesMatch.map(t => t.replace(new RegExp(titleRegex.source.split(' (.*)')[0] + ': '), '')) : [];
+        const langTitles = langTitlesMatch ? langTitlesMatch.map(t => t.replace(new RegExp(titleRegex.source.split(' (.*)')[0] + ' '), '')) : [];
 
         otherLangs[lang] = {
             chapters: langChapters,
