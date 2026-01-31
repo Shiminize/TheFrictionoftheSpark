@@ -2,7 +2,7 @@ const CryptoJS = require('crypto-js');
 const fs = require('fs');
 const path = require('path');
 
-const password = 'lieverd';
+const password = 'crazyfrog';
 
 function encryptBook(bookName, languageFiles, images = {}) {
     const bookContent = [];
@@ -95,6 +95,12 @@ function encryptBook(bookName, languageFiles, images = {}) {
         if (otherLangs['cn']) {
             chapterObj.title_cn = otherLangs['cn'].titles[i] ? `第 ${i + 1} 章: ${otherLangs['cn'].titles[i]}` : chapterObj.title;
             chapterObj.content_cn = otherLangs['cn'].chapters[i] ? otherLangs['cn'].chapters[i].trim() : '';
+
+            const bodyGeographyParagraphCN = '她向他倾身，她的嘴离开他的嘴唇仅仅长到足够移到他的耳边。她的声音很低，是一种几乎不扰动空气的耳语。';
+            if (images && images.bodyGeography && chapterObj.content_cn.includes(bodyGeographyParagraphCN)) {
+                const injectionHtml = `\n\n<div class="scene-wrapper"><img src="${images.bodyGeography}" alt="The Geography of the Body" class="scene-img"></div>\n\n`;
+                chapterObj.content_cn = chapterObj.content_cn.replace(bodyGeographyParagraphCN, bodyGeographyParagraphCN + injectionHtml);
+            }
         }
         if (otherLangs['id']) {
             chapterObj.title_id = otherLangs['id'].titles[i] ? `Bab ${i + 1}: ${otherLangs['id'].titles[i]}` : chapterObj.title;
@@ -117,7 +123,8 @@ function encryptBook(bookName, languageFiles, images = {}) {
 
 // 3. TheFrictionOfTheSpark
 encryptBook('TheFrictionOfTheSpark', {
-    en: 'en.txt'
+    en: 'en.txt',
+    cn: 'cn.txt'
 }, {
     cover: 'Content/TheFrictionOfTheSpark/images/cover.jpg',
     lastScene: 'Content/TheFrictionOfTheSpark/images/last_scene.jpg',
